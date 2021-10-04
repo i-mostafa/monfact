@@ -1,7 +1,7 @@
 import { Model } from "mongoose";
 import Filter from "./Filter";
-import { IObject, IQuery } from "./interfaces";
-import { getRefQueries } from "./utils";
+import { IObject } from "./interfaces";
+import { getRefPathes, getRefQueries, isEmpty } from "./utils";
 
 const { dbConnection } = require("../models/mongodb.connect");
 
@@ -11,7 +11,7 @@ export default class Populator extends Filter {
 
   constructor(dbModel: Model<any>, queryObj = {}) {
     super(dbModel, queryObj);
-    this.refPathes = dbModel.refPathes || {};
+    this.refPathes = getRefPathes(dbModel.schema) || {};
     this.refQueries = {};
 
     ({ refQueries: this.refQueries, queryObj: this.queryObj } = getRefQueries(
@@ -38,7 +38,7 @@ export default class Populator extends Filter {
   }
   async exec() {
     console.log(this.refQueries);
-    if (!_.isEmpty(this.refQueries)) await this.resolvePopPathes();
+    if (!isEmpty(this.refQueries)) await this.resolvePopPathes();
 
     return this.queryObj;
   }

@@ -1,3 +1,4 @@
+import { Schema } from "mongoose";
 import { IObject, IQuery } from "./interfaces";
 
 export const excludeFilterOptions = (queryObj: any, apiOptions: any) => {
@@ -46,3 +47,18 @@ export const isEmpty = (obj: IObject<any> | any[]) =>
  *
  */
 export const isNumeric = (str: string) => str !== "" && !isNaN(Number(str));
+
+export const getRefPathes = (
+  schema: Schema,
+  refPathes: IObject<string> = {},
+  parentPath = ""
+) => {
+  schema.eachPath((path) => {
+    const obj = schema.paths[path].options;
+    if (obj.type instanceof Schema)
+      return getRefPathes(obj.type, refPathes, `${path}.`);
+
+    if (obj.ref) refPathes[`${parentPath}${path}`] = obj.ref;
+  });
+  return refPathes;
+};

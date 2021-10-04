@@ -133,6 +133,7 @@ export default class ResFactory extends Factory {
         status: "success",
       });
     });
+
   toggle = (dbModel: Model<any>) =>
     catchAsync(async (req, res, next) => {
       const status = req.body.status;
