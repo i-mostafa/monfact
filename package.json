@@ -1,0 +1,38 @@
+{
+  "name": "monfact",
+  "version": "1.0.0",
+  "description": "MongoDb factory to translate API Queries to MongoDb",
+  "main": "lib/index.js",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/i-mostafa/monfact.git"
+  },
+  "keywords": [
+    "mongodb",
+    "factory",
+    "express",
+    "node"
+  ],
+  "author": {
+    "name": "Islam Mostafa",
+    "email": "islam.mostafa.fahmey@gmail.com",
+    "url": "https://github.com/i-mostafa"
+  },
+  "files": [
+    "lib/**/*",
+    "types/**/*"
+  ],
+  "typings": "types/index",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/i-mostafa/monfact/issues"
+  },
+  "homepage": "https://github.com/i-mostafa/monfact#readme",
+  "devDependencies": {
+    "typescript": "^4.4.3"
+  }
+}
